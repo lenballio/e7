@@ -48,8 +48,6 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
 
         Schema($scope.collection.schema.uuid).then(function (def) {
             $scope.wizard = def.wizard;
-			
-			
         });
     }
 
@@ -274,7 +272,8 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
         $rootScope.item = $scope.item;
         $rootScope.version = version;
 
-        $location.path("/contribute");
+        //$location.path("/contribute");
+        $location.path("/create");
     }
 
     function loadModStatus() {
