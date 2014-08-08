@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
+Version: 1.5.5
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js" id="ng-app" ng-app="eps">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<title>E7 DEMO</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<meta name="MobileOptimized" content="320">
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+ 
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<link rel="stylesheet" type="text/css" href="assets/plugins/select2/select2_metro.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/clockface/css/clockface.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/datepicker.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-timepicker/compiled/timepicker.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-colorpicker/css/colorpicker.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/jquery-multi-select/css/multi-select.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/jquery-tags-input/jquery.tagsinput.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+<!-- END PAGE LEVEL STYLES -->
+<!-- BEGIN THEME STYLES -->
+<link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="lib/angular-ui/ui-bootstrap-0.5.0.min.js"></script>
+  <script src="lib/angular-ui/angular-ui-router.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/services/api-service.js"></script>
+  <script src="js/services/eps-file-service.js"></script>
+  <script src="js/services/eps-item-service.js"></script>
+  <script src="js/services/eps-moderation-service.js"></script>
+  <script src="js/services/eps-entity-service.js"></script>
+  <script src="js/services/eps-link-service.js"></script>
+  <script src="js/customlib.js"></script>
+  
+  
+  
+  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js"></script> 
+  
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed page-sidebar-fixed">
+<!-- BEGIN HEADER -->
+<ng:include src="$service('$route').current.template" scope="$service('$route').current.scope" onload="addjQueryToPartial()"></ng:include>
+
+<div class="header navbar navbar-inverse navbar-fixed-top">
+	<!-- BEGIN TOP NAVIGATION BAR -->
+	<div class="header-inner">
+		<!-- BEGIN LOGO -->
+		<a class="navbar-brand" href="#">
+            <img src="assets/E7logo.png" alt="E7" class="img-responsive">
+		</a>
+		<!-- END LOGO -->
+        <ul class="nav navbar-nav top-nav">
+            <li ng-class="{ active: $state.includes('dashboard') }"><a ui-sref ="dashboard"><i class="fa fa-home"></i>Home</a></li>
+            <li ng-class="{ active: $state.includes('discover') }"><a ui-sref ="discover.search"><i class="fa fa-eye"></i>Discover</a></li>
+            <li ng-class="{ active: $state.includes('create') }"><a ui-sref ="create"><i class="fa fa-edit"></i>Modify</a></li>
+            <li ng-class="{ active: $state.includes('admin') }"><a ui-sref ="admin"><i class="fa fa-cog"></i>Admin</a></li>
+        </ul>
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<img src="assets/img/menu-toggler.png" alt=""/>
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->
+		<ul class="nav navbar-nav pull-right">
+
+			<!-- BEGIN INBOX DROPDOWN -->
+			<li class="dropdown" id="header_inbox_bar">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+				<i class="fa fa-envelope"></i>
+				<span class="badge">
+					2
+				</span>
+				</a>
+				<ul class="dropdown-menu extended inbox">
+					<li>
+						<p>
+							You have 2 notifications
+						</p>
+					</li>
+					<li>
+						<ul class="dropdown-menu-list scroller" style="height: 250px;">
+							<li>
+								<a href="#">
+								<span class="subject">
+									<span class="from">
+										Notification
+									</span>
+									<span class="time">
+										Just Now
+									</span>
+								</span>
+								<span class="message">
+									 Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+								</span>
+								</a>
+							</li>
+                            <li>
+								<a href="#">
+								<span class="subject">
+									<span class="from">
+										Notification
+									</span>
+									<span class="time">
+										Yesterday
+									</span>
+								</span>
+								<span class="message">
+									 Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+								</span>
+								</a>
+							</li>
+							
+						</ul>
+					</li>
+					<li class="external">
+						<a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
+					</li>
+				</ul>
+			</li>
+			<!-- END INBOX DROPDOWN -->
+			<!-- BEGIN TODO DROPDOWN -->
+			<li class="dropdown" id="header_task_bar">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+				<i class="fa fa-check-square"></i>
+				<span class="badge">
+					3
+				</span>
+				</a>
+				<ul class="dropdown-menu extended inbox">
+					<li>
+						<p>
+							You have 3 pending tasks
+						</p>
+					</li>
+					<li>
+						<ul class="dropdown-menu-list scroller" style="height: 250px;">
+													<ul class="dropdown-menu-list scroller" style="height: 250px;">
+							<li>
+								<a href="#">
+								<span class="subject">
+									<span class="from">
+										Task
+									</span>
+									<span class="time">
+										Just Now
+									</span>
+								</span>
+								<span class="message">
+									 Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+								</span>
+								</a>
+							</li>
+                            <li>
+								<a href="#">
+								<span class="subject">
+									<span class="from">
+										Task
+									</span>
+									<span class="time">
+										Yesterday
+									</span>
+								</span>
+								<span class="message">
+									 Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="subject">
+									<span class="from">
+										Task
+									</span>
+									<span class="time">
+										Friday
+									</span>
+								</span>
+								<span class="message">
+									 Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+								</span>
+								</a>
+							</li>
+						</ul>
+						</ul>
+					</li>
+					<li class="external">
+						<a href="#">See all tasks <i class="m-icon-swapright"></i></a>
+					</li>
+				</ul>
+			</li>
+			<!-- END TODO DROPDOWN -->
+			<!-- BEGIN USER LOGIN DROPDOWN -->
+			<li class="dropdown user">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+				
+				<span class="username">
+					Welcome, John Smith
+				</span>
+				<i class="fa fa-angle-down"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="extra_profile.html"><i class="fa fa-user"></i> My Profile</a>
+					</li>
+					<li>
+						<a href="login.html"><i class="fa fa-key"></i> Log Out</a>
+					</li>
+				</ul>
+			</li>
+			<!-- END USER LOGIN DROPDOWN -->
+		</ul>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+        <div ui-view></div>
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<!--<div class="footer">
+	<div class="footer-inner">
+		 2013 &copy; Metronic by keenthemes.
+	</div>
+	<div class="footer-tools">
+		<span class="go-top">
+			<i class="fa fa-angle-up"></i>
+		</span>
+	</div>
+</div>-->
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+   <script src="assets/plugins/respond.min.js"></script>
+   <script src="assets/plugins/excanvas.min.js"></script> 
+   <![endif]-->
+<script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="assets/plugins/fuelux/js/spinner.min.js"></script>
+<script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery.input-ip-address-control-1.0.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
+<script type="text/javascript" src="assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+ 
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="assets/scripts/app.js"></script>
+<script src="assets/scripts/form-wizard.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+jQuery(document).ready(function() {       
+   // initiate layout and plugins
+   App.init();
+  // FormComponents.init();
+ //  FormWizard.init();
+   
+   
+   
+});   
+</script>
+
+</ng:include>
+
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,19 @@
+<div class="page-content admin">
+  <!--Sidebar content-->
+  <h3>Config:</h3>
+  <form ng-submit="done()">
+      <div>
+    Institution URL (No trailing /):
+    <input ng-model="url"/>
+          </div>
+      <div>
+    User:
+    <select ng-model="user" ng-options="usr as (usr + ' - ' + tok) for (usr, tok) in users"></select>
+    <a href="" ng-click="addUser()">Add user</a><br/>
+    <a href="" ng-click="editUser()">Edit user</a><br/>
+    <a href="" ng-click="deleteUser()">Delete user</a>
+    <br/><br/>
+    <button class="btn">Done</button>
+          </div>
+  </form>
+</div>

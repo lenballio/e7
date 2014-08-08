@@ -1,0 +1,34 @@
+<div class="span2">
+  <!--Sidebar content-->
+  <h3>Contribute to:</h3>
+  <select ng-model="collection" ng-show="collections" ng-change="loadWizard()" ng-options="value.name for (col, value) in collections">
+  </select>
+</div>
+<div class="span4 content" ng-show="wizard">
+  <!--Body content-->
+  <div class="spontent">
+    <h3>Metadata:</h3>
+    <a ng-click="rawview = false" href="">Fields</a> | <a href="" ng-click="rawview = true">Raw</a><br/><br/>
+    <form ng-submit="contribute()">
+      <div ng-hide="rawview">
+        <div ng-repeat="path in wizard">{{path}}:<br/><input ng-model="data[path]"/></div>
+      </div>
+      <div ng-show="rawview">
+        <textarea class="wide" ng-model="item.metadata" rows="10">
+        </textarea>
+      </div>
+      Draft: <input type="checkbox" ng-model="draft"/><br/><br/>
+      <button class="btn">Contribute</button>
+    </form>
+    <p ng-show="success">Success</p>
+  </div>
+</div>
+<div class="span6 content" ng-show="wizard">
+  <div class="spontent">
+    <h3>Attachments:</h3><br/>
+    <input type="file" ng-model="files" upload/><br/>
+    <ul>
+      <li ng-repeat="file in files">{{file.name}}</li>
+    </ul>
+  </div>
+</div>

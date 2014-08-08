@@ -1,0 +1,130 @@
+﻿<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <h3>In which collection would you like to create an item?</h3>
+        <ul class="page-sidebar-menu">
+            <li class="active ">
+                <a href="javascript:;">
+                    <i class="fa fa-th-large"></i>
+                    <span class="title">STANDARD COLLECTIONS
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="active">
+                        <a href ="">Books</a>
+                    </li>
+                    <li>
+                        <a href="">Journals</a>
+                    </li>
+                    <li>
+                        <a href="">Photography</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="active ">
+                <a href="">
+                    <i class="fa fa-th-large"></i>
+                    <span class="title">COPYRIGHT MATERIAL
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="">eReserve</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>
+<!-- END SIDEBAR -->
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="col-md-8 form-wizard" ng-show="wizard">
+
+
+            <ul class="nav nav-pills nav-justified steps">
+                <li class="active">
+                    <a class="step">
+                        <span class="number">1
+                        </span>
+                        <span class="desc">
+                            <i class="fa fa-check"></i>Main details
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="step">
+                        <span class="number">2
+                        </span>
+                        <span class="desc">
+                            <i class="fa fa-check"></i>Extra information
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="step active">
+                        <span class="number">3
+                        </span>
+                        <span class="desc">
+                            <i class="fa fa-check"></i>Copyright Info
+                        </span>
+                    </a>
+            </ul>
+
+
+
+            <!--<a ng-click="rawview = false" href="">Fields</a> | <a href="" ng-click="rawview = true">Raw</a><br/><br/>-->
+            <div class="form-wizard">
+                <form ng-submit="contribute()">
+                    <div class="form-group" ng-repeat="path in wizard">
+                        <label class="control-label col-md-2">{{path | xmlToCapitalize}}</label>
+                        <div class="col-md-10">
+                            <input ng-model="data[path]" class="form-control" /><br />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">
+                            Draft
+                        </label>
+                        <div class="col-md-10">
+                            <input type="checkbox" ng-model="draft" />
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="col-md-offset-2 col-md-10">
+                        <br />
+                        <br />
+                        <button class="btn">Contribute</button>
+                    </div>
+                </form>
+                <p ng-show="success">Success</p>
+
+                <br />
+                <br />
+                <!--<div class="col-md-12">
+                    <h3>Attachments</h3>
+                    <br />
+                    <input type="file" ng-model="files" upload /><br />
+                    <ul>
+                        <li ng-repeat="file in files">{{file.name}}</li>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+jQuery(document).ready(function() {    
+    FormWizard.init();  
+});
+</script>
+<!-- END CONTENT -->

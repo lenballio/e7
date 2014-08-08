@@ -1,0 +1,62 @@
+/* app css stylesheet */
+
+body {
+  padding-top: 20px;
+}
+
+.items {
+  list-style: none;
+}
+
+.items li {
+  clear: both;
+  min-height: 40px;
+  padding-top: 15px;
+  padding-left: 15px;
+  margin-bottom: 1em;
+}
+
+.epsnavbar {
+  text-align: right;
+}
+
+.content {
+  border-left: 1px solid #DDDDDD;
+}
+
+.spontent {
+  margin-left: 25px;
+}
+
+.span10.content, .span7.content, .span6.content, .span4.content, .span3.content {
+  margin-bottom: 40px;
+  min-height: 300px;
+  padding-bottom: 40px;
+}
+
+.block {
+  display: block;
+  float: left;
+  margin-left: 15px;
+}
+
+.modal {
+  -webkit-transition: opacity .2s linear, none;
+  -moz-transition: opacity .2s linear, none;
+  -ms-transition: opacity .2s linear, none;
+  -o-transition: opacity .2s linear, none;
+  transition: opacity .2s linear, none;
+  top: 50%;
+}
+
+textarea.wide {
+  width: 90%;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+li.entry {
+  margin-bottom:4px;
+}

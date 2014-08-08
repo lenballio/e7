@@ -1,0 +1,126 @@
+<div class="span2">
+	<!--Sidebar content-->
+	<h3>Details:</h3><br/>
+	<div>
+		<strong>Name:</strong><br/>
+		<p>{{item.name}}</p>
+	</div>
+	<div ng-show="item.description">
+		<strong>Description:</strong><br/>
+		<p>{{item.description}}</p>
+	</div>
+	<div>
+		<strong>Version:</strong>
+		<select  ng-model="selectedVersion" ng-change="goToVersion(selectedVersion)" ng-options="version for version in versions">
+	    </select>
+	</div>
+	<div>
+		<strong>Status:</strong><br/>
+		<p>{{item.status}}</p>
+	</div>
+	<div>
+		<strong>UUID:</strong><br/>
+		<p>{{item.uuid}}</p>
+	</div>
+	<div>
+		<strong>Owner:</strong><br/>
+		<p>{{item.owner.id}}</p>
+	</div>
+	<div>
+		<strong>Collection:</strong><br/>
+		<p>{{item.collection.uuid}}</p>
+	</div>
+</div>
+<div class="span4 content">
+	<!--Body content-->
+	<div class="spontent">
+		<h3>Metadata:</h3>
+		<a ng-click="rawview = false" href="">Fields</a> | <a ng-click="rawview = true" href="">Raw</a><br/><br/>
+		<div ng-repeat="(path, value) in item.fieldMap" ng-hide="rawview">
+			<strong>{{path}}:</strong><br/>
+			<p>{{value}}</p>
+		</div>
+		<div ng-show="rawview">
+			{{item.metadata}}
+		</div>
+
+		<div ng-show="attachments">
+			<hr/>
+
+			<h3>Attachments:</h3>
+			<ul>
+				<li ng-repeat="attachment in attachments"><a href="{{attachment.link}}" target="_blank">{{attachment.name}}</a></li>
+			</ul>
+		</div>
+
+		<div ng-show="workflow">
+			<hr/>
+
+			<h3>Workfow:</h3>
+			<div>
+				<strong>Name:</strong><br/>
+				<p>{{workflow.name}}</p>
+			</div>
+			<div ng-show="workflow.description">
+				<strong>Description:</strong><br/>
+				<p>{{workflow.description}}</p>
+			</div>
+
+			<strong>Tasks:</strong><br/>
+			<ul><li>
+				{{workflow.root.name}}: (Root)
+				<ul><li ng-repeat="data in workflow.root.nodes" ng-include="'partials/task.html'" class="darkish"></li></ul>
+			</li></ul>
+		</div>
+
+		<div ng-show="history">
+			<hr/>
+
+			<h3>History:</h3>
+			<ul>
+				<li ng-repeat="entry in history" class="entry">
+					<strong>Type:</strong> {{entry.type}}<br/>
+					<strong>State:</strong> {{entry.state}}<br/>
+					<span ng-show="entry.stepName"><strong>Step:</strong> {{entry.stepName}}<br/></span>
+					<span ng-show="entry.comment"><strong>Comment:</strong> {{entry.comment}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="span6 content">
+	<!--Body content-->
+	<div class="spontent">
+		<h3>Actions:</h3><br/>
+		<div class="btn-group">
+			<button ng-repeat="(action,statuses) in actions" ng-click="performAction(action)" ng-class="{disabled: !isAllowed(action)}" class="btn">{{action}}</button>
+		</div><br/>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<button ng-click="delete()" ng-class="{disabled: item.status == 'deleted'}" class="btn">Delete</button>
+				<button ng-click="purge()" ng-class="{disabled: !(item.status == 'deleted')}" class="btn">Purge</button>
+			</div>
+			<div class="btn-group">
+				<button ng-click="edit()" class="btn">Edit</button>
+				<button ng-click="newVersion()" class="btn">New version</button>
+			</div>
+		</div>
+		<br/>
+		<div ng-show="moderation">
+			<hr/>
+			<h3>Tasks:</h3>
+			<div ng-repeat="task in moderation">
+				<strong>{{task.name}}:</strong>
+				<br/>
+				<textarea class="wide" ng-model="messages[task.uuid]" rows="3"></textarea>
+				<br/>
+				<div class="btn-group">
+					<button class="btn btn-success" ng-click="moderate('accept', task.uuid)">Accept</button>
+					<button class="btn btn-warning" ng-click="moderate('reject', task.uuid)">Reject</button>
+					<button class="btn btn-info" ng-click="moderate('comment', task.uuid)">Comment</button>
+				</div>
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>

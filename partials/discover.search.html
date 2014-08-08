@@ -1,0 +1,102 @@
+<div class="col-lg-6">
+    <form ng-submit="search()">
+        <div class="input-icon right searchentry">
+            
+            <input x-webkit-speech ng-model="query" type="text" class="form-control input-lg" name="query" placeholder="enter search..."/>
+            <button class="btn"><i class="fa fa-search"></i></button>
+        </div>
+        </form>
+
+        <div class="modifiers col-xs-12">
+            <div class="col-xs-6 modifier-left">
+                <div class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">No filter <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Filter by Owner</a></li>
+                        <li><a href="">Filter by Date Modified</a></li>
+                        <li><a href="">No Filter</a></li>
+                    </ul>
+                </div>
+            </div>
+
+               
+            <div class="col-xs-6 modifier-right">
+                <div class="dropdown">
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">Sorted by Relevance <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Sort by Newest</a></li>
+                        <li><a href="">Sort by Oldest</a></li>
+                        <li><a href="">Sort by Relevance</a></li>
+                        <li><a href="">Sort by Rating</a></li>
+                        <li><a href="">Sort by Title</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="items">
+            <li ng-repeat="result in results">
+                <!--<a href="#/discover/search/item/{{result.uuid}}/{{result.version}}">-->
+                <a ui-sref=".item({itemId:result.uuid, version:result.version})">
+                    <div class="box result">
+                        <h4>{{result.name}}</h4>
+                        <p class="result-desc">{{result.description}}</p>
+                        <p><span class="rating">
+                            3<i class="fa fa-comment"></i>
+                            <i class="fa fa-star grey"></i>
+                            <i class="fa fa-star grey"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            </span>
+                            
+                            <span>VERSION {{result.version}}</span></p>
+                        
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <p class="spontent" ng-show="noResults">Nothing found...</p>
+    
+</div>
+<div class="col-lg-6">
+    <div class="ui-view"></div>
+</div>
+
+
+
+
+<div class="span2">
+
+
+    <!--
+        Order by:<br/>
+        <select ng-model="orderProp" ng-change="search()">
+          <option value="relevance">Relevance</option>
+          <option value="modified">Date modified</option>
+          <option value="name">Name</option>
+        </select>
+        Reverse: <input type="checkbox" ng-model="reverse" ng-change="search()"/>
+        <br/><br/>
+        Where:<br/>
+        <input ng-model="where"/><br/>
+        Show all: <input type="checkbox" ng-model="showall" ng-change="search()"/>
+        <br/><br/>-->
+
+
+</div>
+<div class="span10 content">
+    <!--Body content-->
+    <!--  <div class="spontent" ng-show="results">
+        <p>Showing {{searchResults.start + 1}} to {{searchResults.start + results.length}} of {{searchResults.available}}</p>
+        <div class="pagination">
+          <ul>
+            <li ng-class="{disabled: currentPage <= 6}"><a ng-click="search()" href="">First</a></li>
+            <li ng-repeat="page in pages" ng-class="{active: page == currentPage}"><a ng-click="search(page)" href="">{{page}}</a></li>
+            <li ng-class="{disabled: currentPage >= howmany - 5}"><a ng-click="search(howmany)" href="">Last</a></li>
+          </ul>
+        </div>
+      </div>-->
+
+</div>

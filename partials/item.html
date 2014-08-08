@@ -1,0 +1,41 @@
+﻿<div id="item-summary" class="box eq-resource">
+    <p class="quick-meta">
+        <span>{{item.status | uppercase}} <i class="fa fa-angle-down"></i></span>
+        <span>VERSION {{item.version}} <i class="fa fa-angle-down"></i></span>
+    </p>
+    <h1>{{item.name}}</h1>
+    <dl>
+    <p>
+        <dt>Description</dt>
+        <dd>{{item.description}}</dd>
+    </p>
+    <p>
+        <dt>Owner</dt>
+        <dd>{{item.owner.id}}</dd>
+    </p>
+    <p>
+        <dt>Collection</dt>
+        <dd>{{item.collection.uuid}}</dd>
+    </p>
+    <p ng-class="{ active: $state.includes('dashboard') }">
+        <dt>Attachments</dt>
+        <dd>
+            <ul>
+                <li ng-repeat="attachment in attachments"><a href="{{attachment.link}}" target="_blank">{{attachment.name}}</a></li>
+            </ul>
+        </dd>
+    </p>
+    
+    <br /><br /><br />
+
+
+        	<div class="spontent">
+		<div class="btn-group">
+            <button ng-click="edit()" class="btn"><i class="fa fa-pencil"></i> Edit</button>
+            <button ng-click="newVersion()" class="btn"><i class="fa fa-edit"></i> New version</button>
+            <button class="btn"><i class="fa fa-heart"></i> Favourite</button>
+            <button class="btn"><i class="fa fa-share"></i> Share</button>
+		</div>
+                </div>
+
+</div>

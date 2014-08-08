@@ -1,0 +1,4 @@
+{{data.name}}: ({{data.type}})
+<br ng-show="data.description"/>
+{{data.description}}
+<ul><li ng-repeat="data in data.nodes" ng-include="'partials/task.html'"></li></ul>

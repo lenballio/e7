@@ -1,0 +1,37 @@
+<div class="span2">
+  <!--Sidebar content-->
+  <h3>Notifications:</h3>
+  <form ng-submit="search()">
+    Query: <input ng-model="query"/>
+    Filter:
+    <select ng-model="type" ng-change="search()">
+      <option value="all">All</option>
+      <option value="wentlive">Went live</option>
+      <option value="rejected">Rejected</option>
+      <option value="badurl">Bad URL</option>
+      <option value="watchedwentlive">Watched collection</option>
+      <option value="overdue">Overdue</option>
+    </select>
+    <button class="btn">Search</button>
+  </form>
+
+</div>
+<div class="span10 content">
+  <!--Body content-->
+  <div class="spontent" ng-show="results">
+    <div class="pagination">
+      <ul>
+        <li ng-class="{disabled: currentPage <= 6}"><a ng-click="search()" href="">First</a></li>
+        <li ng-repeat="page in pages" ng-class="{active: page == currentPage}"><a ng-click="search(page)" href="">{{page}}</a></li>
+        <li ng-class="{disabled: currentPage >= howmany - 5}"><a ng-click="search(howmany)" href="">Last</a></li>
+      </ul>
+    </div>
+  </div>
+  <ul class="items">
+    <li ng-repeat="result in results" class="thumbnail">
+      <a href="#/item/{{result.item.uuid}}/{{result.item.version}}">{{result.item.name}}: {{result.reason}}</a>
+      <p>{{result.item.description}}</p>
+    </li>
+  </ul>
+  <p class="spontent" ng-show="noResults">Nothing found...</p>
+</div>
