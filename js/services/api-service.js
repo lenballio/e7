@@ -37,7 +37,7 @@ factory('Api', function($http, $dialog, Vars) {
 	
 	return {
 		request: function(method, url, params, data, config) {
-
+            
 			var token =  Vars.getToken();
 
 			if(token) {

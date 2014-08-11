@@ -124,4 +124,14 @@ filter('xmlToCapitalize', function() {
             return str.substring(0, 1).toUpperCase() + str.substring(1);
         }
     }
+}).
+
+filter('xmlToFieldName', function() {
+    return function(input, scope) {
+        if (input != null) {
+            var str = input.substring(input.lastIndexOf('/') + 1)
+            return str.substring(0, 1).toLowerCase() + str.substring(1);
+        }
+    }
 });
+

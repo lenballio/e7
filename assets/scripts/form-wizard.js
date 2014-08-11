@@ -13,15 +13,18 @@ var FormWizard = function () {
                 return "<img class='flag' src='assets/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
             }
 
+            /*
             $("#country_list").select2({
                 placeholder: "Select",
                 allowClear: true,
                 formatResult: format,
                 formatSelection: format,
                 escapeMarkup: function (m) {
+                    alert('xxx')
                     return m;
                 }
             });
+            */
 
             var form = $('#submit_form');
             var error = $('.alert-danger', form);
@@ -33,65 +36,23 @@ var FormWizard = function () {
                 errorClass: 'help-block', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
-                    //account
-                    username: {
-                        minlength: 5,
+                    /*
+                    //Main detail
+                    "name": {
                         required: true
                     },
-                    password: {
-                        minlength: 5,
-                        required: true
-                    },
-                    rpassword: {
-                        minlength: 5,
-                        required: true,
-                        equalTo: "#submit_form_password"
-                    },
-                    //profile
-                    fullname: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    gender: {
-                        required: true
-                    },
-                    address: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
+                    
+                    //Extra Information
                     country: {
                         required: true
                     },
-                    //payment
-                    card_name: {
+                    
+                    //Copryright Info
+                    author: {
                         required: true
-                    },
-                    card_number: {
-                        minlength: 16,
-                        maxlength: 16,
-                        required: true
-                    },
-                    card_cvc: {
-                        digits: true,
-                        required: true,
-                        minlength: 3,
-                        maxlength: 4
-                    },
-                    card_expiry_date: {
-                        required: true
-                    },
-                    'payment[]': {
-                        required: true,
-                        minlength: 1
                     }
+                    */
+                    
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes
@@ -156,12 +117,17 @@ var FormWizard = function () {
                         $(this).html(input.find('option:selected').text());
                     } else if (input.is(":radio") && input.is(":checked")) {
                         $(this).html(input.attr("data-title"));
-                    } else if ($(this).attr("data-display") == 'payment') {
-                        var payment = [];
-                        $('[name="payment[]"]').each(function(){
-                            payment.push($(this).attr('data-title'));
+                    } else if ($(this).attr("data-display") == 'draft') {
+                        var draft = [];
+                        $('[name="draft"]').each(function() {
+                            if ($(this).is(':checked')) {
+                                draft.push('Yes');
+                            } else {
+                                draft.push('No');
+                            }
+                            
                         });
-                        $(this).html(payment.join("<br>"));
+                        $(this).html(draft.join("<br>"));
                     }
                 });
             }
@@ -208,6 +174,18 @@ var FormWizard = function () {
                     handleTitle(tab, navigation, clickedIndex);
                 },
                 onNext: function (tab, navigation, index) {
+                    if (index == 1) {
+                        $("#country_list").select2({
+                            placeholder: "Select",
+                            allowClear: true,
+                            formatResult: format,
+                            formatSelection: format,
+                            escapeMarkup: function (m) {
+                                return m;
+                            }
+                        });
+                    }
+                    
                     success.hide();
                     error.hide();
 
@@ -234,9 +212,11 @@ var FormWizard = function () {
             });
 
             $('#form_wizard_1').find('.button-previous').hide();
+            
             $('#form_wizard_1 .button-submit').click(function () {
-                alert('Finished! Hope you like it :)');
+                //alert('Finished! Hope you like it :)');
             }).hide();
+            
         }
 
     };

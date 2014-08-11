@@ -36,7 +36,7 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
 					
 					
   }
- , 500 );
+ , 500);
 
 		
 
@@ -44,10 +44,31 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
     $scope.data = {};
 
     $scope.loadWizard = function () {
-        $scope.wizard = undefined;
-
+        $scope.wizard = {};
+        
+        var wizard_fields = {};
+        wizard_fields.main_details = {};
+        wizard_fields.extra_info = {};
+        wizard_fields.copyright_info = {};
+        
         Schema($scope.collection.schema.uuid).then(function (def) {
             $scope.wizard = def.wizard;
+            
+            var wz = def.wizard; 
+            
+            //wizard_fields.copyright_info[ '/xml/item/draft' ] = '/xml/item/draft';
+            for(var a in wz) {
+                if (wz[a] == '/xml/item/name' || wz[a] == '/xml/item/description' || wz[a] == '/xml/item/subject') {
+                    wizard_fields.main_details[ a ] = wz[a];   
+                } else if (wz[a] == '/xml/item/country' || wz[a] == '/xml/item/level' || wz[a] == '/xml/item/file/@path') {
+                    wizard_fields.extra_info[ a ] = wz[a];
+                } else if (wz[a] == '/xml/item/file/author' ) {
+                    wizard_fields.copyright_info[ a ] = wz[a];
+                }      
+            }
+             
+            $scope.wizard_fields = wizard_fields;
+            
         });
     }
 
@@ -132,6 +153,12 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
             }
         });
     }
+    
+    $scope.country = [
+        {code: 'AF', name: 'Afghanistan'},
+        {code: 'AL', name: 'Albania'},
+    ];
+    
 }
 
 function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection) {
