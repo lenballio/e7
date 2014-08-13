@@ -164,11 +164,13 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
 function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection) {
     
     $("#item-summary").hide();
+    
+    var metadata = ''; // Task 3
     $scope.loadItem = function () {
         $scope.item = undefined;
 
         Item.get($stateParams.itemId, $stateParams.version, true).then(function (data) {
-
+            
             $scope.versions = [];
             //The index won't always be the version
             for (var index in data) {
@@ -178,6 +180,10 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
                 if (data[index].version == $stateParams.version) {
                     $scope.selectedVersion = data[index].version;
                     $scope.item = data[index];
+                    
+                    /** Assign metadata so we can use it in popup window to display the XML data **/ 
+                     //metadata = $scope.item.metadata                    
+
                 }
             }
 
@@ -279,6 +285,34 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
             $rootScope.lock = data.uuid;
             copyFA();
         });
+    }
+    
+    $scope.xml = function() {
+        
+        var json_data = angular.toJson($scope.item)
+        json_data = ""+json_data 
+
+        var win = window.open ("", "mywindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
+        
+        win.document.doctype ='<!DOCTYPE html>';
+        
+        var meta = win.document.createElement('meta');
+        meta.httpEquiv = "X-UA-Compatible";
+        meta.content = "IE=edge";
+        win.document.getElementsByTagName('head')[0].appendChild(meta);
+        
+
+        var meta = win.document.createElement('meta');
+        meta.httpEquiv = "content-type";
+        meta.content = "text/html";
+        win.document.getElementsByTagName('head')[0].appendChild(meta);
+
+        
+
+        //win.document.body.innerHTML = json_data
+        var body = win.document.body;
+        $(body).text(json_data).html(); 
+        //win.document.write(data);
     }
 
     $scope.newVersion = function () {

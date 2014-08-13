@@ -1,4 +1,4 @@
-﻿<div id="item-summary" class="box eq-resource">
+<div id="item-summary" class="box eq-resource">
     <p class="quick-meta">
         <span>{{item.status | uppercase}} <i class="fa fa-angle-down"></i></span>
         <span>VERSION {{item.version}} <i class="fa fa-angle-down"></i></span>
@@ -35,7 +35,7 @@
             <button ng-click="newVersion()" class="btn"><i class="fa fa-edit"></i> New version</button>
             <button class="btn"><i class="fa fa-heart"></i> Favourite</button>
             <button class="btn"><i class="fa fa-share"></i> Share</button>
-            <button class="btn"><i class="fa fa-file-text"></i> XML</button>
+            <button ng-click="xml()" class="btn"><i class="fa fa-file-text"></i> XML</button>
 		</div>
                 </div>
 
