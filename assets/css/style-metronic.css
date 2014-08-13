@@ -123,7 +123,7 @@ Buttons & Dropdown Buttons
 .btn.blue {
   color: white;  
   text-shadow: none;	
-  background-color: #4d90fe;
+  background-color: #1e8fc6;
 }
 .btn.blue:hover, 
 .btn.blue:focus, 
@@ -145,7 +145,7 @@ Buttons & Dropdown Buttons
 .btn-group .btn.blue.active, 
 .btn-group .btn.blue.disabled,
 .btn-group .btn.blue[disabled] { 
-  background-color: #0362fd !important;
+  background-color: #36a9e1 !important;
   color: #fff !important;
   outline: none !important;
 }
