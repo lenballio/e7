@@ -54,7 +54,7 @@ var eps = angular.module('eps', ['epsItemService', 'epsModerationService', 'epsE
                 normalized = path.toLowerCase();
 
                 /** following rule is applied for tab so it will not handle by router **/
-                if (path == '/tab1' || path == '/tab2' || path == '/tab3') {
+                if (path == '/tab1' || path == '/tab2' || path == '/tab3' || path == '/tab4') {
                     $location.path('/create');
                 } 
         });
