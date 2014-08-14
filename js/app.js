@@ -34,12 +34,36 @@ var eps = angular.module('eps', ['epsItemService', 'epsModerationService', 'epsE
     ['$stateProvider', '$urlRouterProvider',
       function ($stateProvider, $urlRouterProvider) {
 
-          $urlRouterProvider.otherwise('/dashboard');
+        $urlRouterProvider.otherwise('/dashboard');
+        /*
+        $urlRouterProvider.otherwise(function ($injector, $location) {        
+            var path = $location.path(),
+                normalized = path.toLowerCase();
+                
+                /** following rule is applied for tab so it will not handle by router ** /
+                if (path != '/tab1' && path != '/tab2' && path != '/tab3' && path != '/tab4') {
+                    //return '/dashboard';
+                } 
+                //return '/dashboard';
+                            
+        })
+        */            
+        
+        $urlRouterProvider.rule(function ($injector, $location) {
+            var path = $location.path(),
+                normalized = path.toLowerCase();
+
+                /** following rule is applied for tab so it will not handle by router **/
+                if (path == '/tab1' || path == '/tab2' || path == '/tab3') {
+                    $location.path('/create');
+                } 
+        });
+        
+          
 
           if (localStorage.getItem('epsToken') == undefined || localStorage.getItem('epsApiUrl') == undefined) {
               $urlRouterProvider.otherwise('/config');
           }
-
           $stateProvider
             .state("discover", {
                 url: "/discover",

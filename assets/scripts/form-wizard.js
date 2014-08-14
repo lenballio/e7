@@ -36,7 +36,7 @@ var FormWizard = function () {
                 errorClass: 'help-block', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
-                    /*
+                   /* 
                     //Main detail
                     "name": {
                         required: true
@@ -173,7 +173,7 @@ var FormWizard = function () {
                     }
                     handleTitle(tab, navigation, clickedIndex);
                 },
-                onNext: function (tab, navigation, index) {
+                onNext: function (tab, navigation, index) { 
                     if (index == 1) {
                         $("#country_list").select2({
                             placeholder: "Select",
@@ -192,7 +192,7 @@ var FormWizard = function () {
                     if (form.valid() == false) {
                         return false;
                     }
-
+                    
                     handleTitle(tab, navigation, index);
                 },
                 onPrevious: function (tab, navigation, index) {
