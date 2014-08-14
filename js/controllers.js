@@ -289,8 +289,10 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
     
     $scope.xml = function() {
         
-        var json_data = angular.toJson($scope.item)
-        json_data = ""+json_data 
+        var json_data = angular.toJson($scope.item.metadata)
+        json_data = ""+json_data
+        json_data = json_data.replace(/(^")/,'', json_data);
+        json_data = json_data.replace(/"$/,'', json_data); 
 
         var win = window.open ("", "mywindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
         
