@@ -87,8 +87,9 @@ ul.items {
 .box.eq-resource {
     /*height: 400px;*/
     /*padding-bottom:100%;*/
-    position:fixed;
-    width:38%;
+    
+    /*position:fixed;
+    width:38%; */
 }
 
 .input-icon i.fa-search {
