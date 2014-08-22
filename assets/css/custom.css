@@ -195,6 +195,63 @@ div.modifiers {
     top: 46%;
 }
 
+/*** added for custome model-share  ***/
+.modal-share {
+    top: 27%;
+    max-width: 550px;
+}
+
+.modal-backdrop-share {
+    max-width: 620px;
+    top: 24%;
+}
+
+.modal-share .modal-header {
+    padding: 0px;
+  
+}
+
+.modal-share .ms-list {
+    height: 130px;
+}
+
+.modal-share .modal-body {
+    padding-bottom: 0px;
+}
+
+.modal-share .modal-footer {
+    border-top: none;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.modal-share .modal-header {
+    border-bottom: 0px;
+}
+.modal-share .share_title{
+    width:55.33%;
+    float:left;
+}
+
+.modal-share .share_title h3{   
+    margin-top:0px;   
+}
+
+.modal-share .share_title_icon {
+    width:22.33%;
+    float:left;
+    margin-bottom:15px;
+}
+
+.modal-share .share_e7 {
+    width:22.33%;
+    float:left;
+    margin-bottom:15px;
+   
+}  
+
+/*** ***/
+
 .form-wizard .steps li a, .form-wizard .steps {
 background:#f5f5f5;
 

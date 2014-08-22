@@ -161,7 +161,7 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
     
 }
 
-function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection) {
+function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $timeout, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection) {
     
     $("#item-summary").hide();
     
@@ -180,11 +180,13 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
                 if (data[index].version == $stateParams.version) {
                     $scope.selectedVersion = data[index].version;
                     $scope.item = data[index];
+                    console.log($scope.item);
                     
                     /** Assign metadata so we can use it in popup window to display the XML data **/ 
                      //metadata = $scope.item.metadata                    
 
                 }
+                
             }
 
             loadAttachments();
@@ -293,6 +295,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
         json_data = ""+json_data
         json_data = json_data.replace(/(^")/,'', json_data);
         json_data = json_data.replace(/"$/,'', json_data); 
+        //json_data = '<?xml version="1.0" encoding="UTF-8"?>' + json_data  
 
         var win = window.open ("", "mywindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
         
@@ -306,7 +309,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
 
         var meta = win.document.createElement('meta');
         meta.httpEquiv = "content-type";
-        meta.content = "text/html";
+        meta.content = "text/xml";
         win.document.getElementsByTagName('head')[0].appendChild(meta);
 
         
@@ -315,6 +318,42 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, I
         var body = win.document.body;
         $(body).text(json_data).html(); 
         //win.document.write(data);
+    }
+
+    $scope.share = function() {
+            var opts = {
+                dialogClass: 'modal modal-share',
+                backdropClass: 'modal-backdrop modal-backdrop-share',
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'partials/dialog-share.html',
+                controller: 'MessageBoxController',
+                load: function() {
+                    $('#e7-content-item1').multiSelect();
+                },
+                resolve: {
+                    model: function () {
+                        return {
+                            title: 'Item is locked',
+                            message: 'Force unlock and proceed with edit?',
+                            buttons: [{ label: 'Cancel', result: false }, { label: 'Submit', result: true }]
+                        };
+                    }
+                }
+            };
+            
+            $dialog.dialog(opts).open().then(function (result) {
+                
+                if (result) {
+                    //alert('Yes is clicked')
+                } else {
+                    //alert('No is clicked')
+                }
+                
+            }); //end of $dialog
+            
+        
     }
 
     $scope.newVersion = function () {

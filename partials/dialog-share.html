@@ -1,0 +1,47 @@
+<div class="modal-header">
+	<div class="share_title_icon"><img src="assets/img/share_title_icon.png"></div>
+    <div class="share_title"><h3>Push Content item to:</h3></div>
+    <div class="share_e7"><img src="assets/img/share_e7.png"></div>
+</div>
+<div class="modal-body">
+	<div class="row">
+        <div class="portlet box grey">
+
+            <div class="portlet-title">
+            	<div class="caption">
+            		<i class="fa fa-reorder"></i>Multiple Select
+            	</div>
+            	<div class="tools">
+            		<a href="javascript:;" class="collapse"></a>
+            		<a href="#portlet-config" data-toggle="modal" class="config"></a>
+            		<a href="javascript:;" class="reload"></a>
+            		<a href="javascript:;" class="remove"></a>
+            	</div>
+            </div>
+            
+            
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal form-row-seperated">
+                <div class="form-body">
+
+					<div class="form-group">
+						<label class="control-label col-md-3">Default</label>
+						<div class="col-md-9">
+							<select multiple="multiple" class="multi-select" id="e7-content-item1" name="e7-content-item[]">
+								<option>Equella</option>
+								<option>Realise</option>
+								<option >Core Source</option>
+							</select>
+						</div>
+					</div>
+                
+                </div>
+                </form>
+            </div>            
+        
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+	<button ng-repeat="btn in buttons" ng-click="close(btn.result)" class="btn">{{ btn.label }}</button>
+</div>
