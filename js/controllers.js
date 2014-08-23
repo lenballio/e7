@@ -297,7 +297,112 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         json_data = json_data.replace(/"$/,'', json_data); 
         //json_data = '<?xml version="1.0" encoding="UTF-8"?>' + json_data  
 
-        var win = window.open ("", "mywindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
+        var win = openNewWindow('mywin');
+
+        //win.document.body.innerHTML = json_data
+        var body = win.document.body;
+        $(body).text(json_data).html(); 
+        //win.document.write(data);
+    }
+
+    $scope.share = function() {
+        var me = this;
+            var opts = {
+                dialogClass: 'modal modal-share',
+                backdropClass: 'modal-backdrop modal-backdrop-share',
+                backdrop: true,
+                keyboard: true,
+                backdropClick: true,
+                templateUrl: 'partials/dialog-share.html',
+                controller: 'MessageBoxController',
+                load: function() {
+                    $('#e7-content-item1').multiSelect({
+                        afterSelect: function() {
+                            me.findSelectedOptions();    
+                        },
+                        afterDeselect: function() {
+                            me.findSelectedOptions();
+                        }
+                    });
+
+                    var obj = $('.modal-share');
+                    console.log(obj.length)
+                    console.log(obj);
+
+                },
+                resolve: {
+                    model: function () {
+                        return {
+                            title: '',
+                            message: '',
+                            buttons: [{ label: 'Cancel', result: false }, { label: 'Submit', result: true }]
+                        };
+                    }
+                }
+            };
+            
+            $dialog.dialog(opts).open().then(function (result) {
+                
+                if (result) {
+                    //alert('Submit is clicked')
+                    console.log(me.selectedOption);
+                    console.log($stateParams.itemId);
+                    var html = '';
+                    
+                    for(var i = 0; i < me.selectedOption.length; i++) {
+                        html += $stateParams.itemId
+                        html += '<br>';
+                        html += '&lt;xml&gt;';
+                        html += '<br>';
+                        html += '**' + me.selectedOption[i];
+                        html += '<br>';
+                    }
+
+                    if (html != '') {
+                        var win = openNewWindow('share-win');
+                        //win.document.body.innerHTML = json_data
+                        var body = win.document.body;
+                        $(body).html(html); 
+                    }
+                } else {
+                    //alert('No is clicked')
+                }
+                
+            }); //end of $dialog
+            
+            this.selectedOption = []
+            this.findSelectedOptions = function() {
+                me.selectedOption = []
+                    
+                var obj = $('.modal-share .ms-selection li.ms-selected');
+                if (obj.length > 0) {
+                    $(obj).each(function(index, item) {
+                        me.selectedOption.push( $(item).text() ); 
+                    })
+                }
+                
+                
+            }
+        
+    }
+    
+    $scope.newVersion = function () {
+        copyFA($scope.versions[$scope.versions.length - 1] + 1)
+    }
+
+    // Copy the file area
+    function copyFA(version) {
+        File.copy($scope.item.uuid, $scope.item.version).then(function (data) {
+            $rootScope.fileArea = data.uuid;
+            loadForEditing(version);
+        });
+    }
+
+    /** below funciton will open new window using window.open method **/ 
+    
+    function openNewWindow(name) {
+    
+        var win = window.open ("", name,"directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
         
         win.document.doctype ='<!DOCTYPE html>';
         
@@ -311,62 +416,11 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         meta.httpEquiv = "content-type";
         meta.content = "text/xml";
         win.document.getElementsByTagName('head')[0].appendChild(meta);
-
         
+        return win;
+    } 
 
-        //win.document.body.innerHTML = json_data
-        var body = win.document.body;
-        $(body).text(json_data).html(); 
-        //win.document.write(data);
-    }
 
-    $scope.share = function() {
-            var opts = {
-                dialogClass: 'modal modal-share',
-                backdropClass: 'modal-backdrop modal-backdrop-share',
-                backdrop: true,
-                keyboard: true,
-                backdropClick: true,
-                templateUrl: 'partials/dialog-share.html',
-                controller: 'MessageBoxController',
-                load: function() {
-                    $('#e7-content-item1').multiSelect();
-                },
-                resolve: {
-                    model: function () {
-                        return {
-                            title: 'Item is locked',
-                            message: 'Force unlock and proceed with edit?',
-                            buttons: [{ label: 'Cancel', result: false }, { label: 'Submit', result: true }]
-                        };
-                    }
-                }
-            };
-            
-            $dialog.dialog(opts).open().then(function (result) {
-                
-                if (result) {
-                    //alert('Yes is clicked')
-                } else {
-                    //alert('No is clicked')
-                }
-                
-            }); //end of $dialog
-            
-        
-    }
-
-    $scope.newVersion = function () {
-        copyFA($scope.versions[$scope.versions.length - 1] + 1)
-    }
-
-    // Copy the file area
-    function copyFA(version) {
-        File.copy($scope.item.uuid, $scope.item.version).then(function (data) {
-            $rootScope.fileArea = data.uuid;
-            loadForEditing(version);
-        });
-    }
 
     //Call with version == undefined to edit $scope.item.version
     //If version is defined it will attempt to create a new version
