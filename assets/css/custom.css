@@ -278,3 +278,9 @@ padding:0px;
 .portlet.box.grey {
     margin-bottom: 25px !important;
 }
+
+.show-all {
+    text-align: right;
+    font-weight: bold;
+    margin-right: 30px;
+}

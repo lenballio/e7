@@ -165,6 +165,8 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
     
     $("#item-summary").hide();
     
+    this.attachments = [];
+    var me = this;
     var metadata = ''; // Task 3
     $scope.loadItem = function () {
         $scope.item = undefined;
@@ -464,6 +466,10 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         if ($scope.item.attachments) {
 
             $scope.attachments = [];
+            $scope.total_attachments = $scope.item.attachments.length;
+            $scope.viewAll = false;
+             
+            me.attachments = []; 
 
             for (var i in $scope.item.attachments) {
                 var attachment = $scope.item.attachments[i];
@@ -497,9 +503,22 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
 
                 }
 
-                $scope.attachments.push({ name: name, link: link });
+                //$scope.attachments.push({ name: name, link: link });
+                me.attachments.push({ name: name, link: link });
+            }
+            
+            if ($scope.total_attachments <= 10) {
+                $scope.attachments = me.attachments; 
+            } else {
+                $scope.attachments = me.attachments.slice(0, 10); 
+                $scope.viewAll = true;
             }
         }
+    }
+    
+    $scope.showAllAttachments = function() {
+        $scope.attachments = me.attachments;
+        $scope.viewAll = false;    
     }
 
     function loadWorkflow() {

@@ -24,9 +24,12 @@
                 <li ng-repeat="attachment in attachments"><a href="{{attachment.link}}" target="_blank">{{attachment.name}}</a></li>
             </ul>
         </dd>
+        
+        <br />
+        <p ng-show="viewAll" class="show-all" ><a href="" ng-click="showAllAttachments()" >View All</a></p>
     </p>
     
-    <br /><br /><br />
+    <br />
 
 
 	<div class="spontent">
