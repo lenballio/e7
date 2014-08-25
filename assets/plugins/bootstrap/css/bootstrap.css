@@ -5443,7 +5443,7 @@ a.thumbnail.active {
 }
 
 .progress-bar-success {
-  background-color: #5cb85c;
+ /* background-color: #5cb85c;*/
 }
 
 .progress-striped .progress-bar-success {
