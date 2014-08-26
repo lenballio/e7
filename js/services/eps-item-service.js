@@ -110,6 +110,7 @@ factory('Item', function(Api, ApiDigiLife) {
             
             var params = {op: 'add_item_share', item_id: item_id, shared_contents: shared_contents}
             return ApiDigiLife.request('GET', params).then(function(data) {
+                console.log("It is in jsonp response");  
                 console.log(data)
             });
             

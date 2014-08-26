@@ -347,8 +347,6 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                 
                 if (result) {
                     //alert('Submit is clicked')
-                    console.log(me.selectedOption);
-                    console.log($stateParams.itemId);
                     var html = '';
                     
                     /*
