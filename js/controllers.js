@@ -297,13 +297,27 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         json_data = ""+json_data
         json_data = json_data.replace(/(^")/,'', json_data);
         json_data = json_data.replace(/"$/,'', json_data); 
-        //json_data = '<?xml version="1.0" encoding="UTF-8"?>' + json_data  
 
-        var win = openNewWindow('mywin');
 
-        //win.document.body.innerHTML = json_data
+        var win = openNewWindow('xml-win');
+        win.blur();
         var body = win.document.body;
-        $(body).text(json_data).html(); 
+        $(body).html("Loading...");
+        
+        Item.saveXML($stateParams.itemId, json_data).then(function (data) {
+            console.log('it is saved');
+            var url = Vars.getDigiLifeURL();
+            url = url + '?item_id=' + $stateParams.itemId + '&op=show_xml';
+            win.focus();
+            
+            win.location = url; 
+        });
+        
+
+        //var win = openNewWindow('mywin');
+        //win.document.body.innerHTML = json_data
+        //var body = win.document.body;
+        //$(body).text(json_data).html(); 
         //win.document.write(data);
     }
 
@@ -354,7 +368,8 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                             content = me.selectedOption.join(",");
                         }
 
-                        var win = window.open ("", 'share-win',"directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");
+                        
+                        var win = openNewWindow('share-win');
                         win.blur();
                         var body = win.document.body;
                         $(body).html("Loading...");

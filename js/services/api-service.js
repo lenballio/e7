@@ -133,22 +133,47 @@ factory('ApiDigiLife', function($http, $dialog, Vars) {
 		request: function(method, params, data, config) {
             
 			//var request = $http({method: method, url: Vars.getDigiLifeURL(), params: params, data: data});
-            var url = Vars.getDigiLifeURL();
-            url = url + '?callback=JSON_CALLBACK';
             
-            var q_string = '';
-            for(a in params) {
-                q_string += '&' + a + '=' + params[a];
-            }
-            url = url + q_string; 
-               
-            var request = $http.jsonp(url).
+            if (params.op == 'save_xml') {
+                var url = Vars.getDigiLifeURL();
+
+                var request = $http({
+                    method: 'POST',
+                    url: url,
+                    data: $.param(params),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                });                
+                
+                /*
+                var request = $http.post(url, $.param(params)).
+                success(function(data, status, headers, config) {
+
+                }).
+                error(function(data, status, headers, config) {
+                    $scope.error = true;
+                });
+                */                
+                
+            } else {
+
+                var url = Vars.getDigiLifeURL();
+                url = url + '?callback=JSON_CALLBACK';
+                
+                var q_string = '';
+                for(a in params) {
+                    q_string += '&' + a + '=' + params[a];
+                }
+                url = url + q_string; 
+            
+                var request = $http.jsonp(url).
                 success(function(data, status, headers, config) {
 
                 }).
                 error(function(data, status, headers, config) {
                     $scope.error = true;
                 });                
+            
+            }   
                 
             
 			return request.then(function(data) {

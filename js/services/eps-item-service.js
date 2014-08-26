@@ -114,6 +114,15 @@ factory('Item', function(Api, ApiDigiLife) {
                 console.log(data)
             });
             
+        },
+        
+        saveXML: function(item_id, xml_data) {
+        
+            var params = {op: 'save_xml', item_id: item_id, xml_data: xml_data}
+            return ApiDigiLife.request('POST', params).then(function(data) {
+                console.log("It is in jsonp xml_data response");  
+                console.log(data)
+            });
         }
         
 	}
