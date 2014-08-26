@@ -19,7 +19,11 @@ factory('Vars', function() {
 		},
 		setUrl: function(input) {
 			return localStorage.setItem('epsApiUrl', input ? input : undefined);
-		}
+		},
+        getDigiLifeURL: function() {
+            //return 'http://127.0.0.1:10045/e7-api/api.php';
+            return 'http://www.digi-life.net.au/e7-api/api.php';
+        }
 	};
 }).
 factory('Api', function($http, $dialog, Vars) {
@@ -111,4 +115,85 @@ factory('Api', function($http, $dialog, Vars) {
 			});
 		}
 	}
+}).
+factory('ApiDigiLife', function($http, $dialog, Vars) {
+
+	var loading = 0;
+
+	var opts = {
+		backdrop: true,
+		keyboard: false,
+		backdropClick: false,
+		templateUrl: 'partials/loading-dialog.html'
+	};
+		
+	var d = $dialog.dialog(opts);
+
+	return {
+		request: function(method, params, data, config) {
+            
+			var request = $http({method: method, url: Vars.getDigiLifeURL(), params: params, data: data});
+
+			function closeDialog() {
+				loading--;
+
+				if(loading == 0) {
+					//d.close();
+				}
+			}
+
+			if(config && config.error) {
+				request.error(function(data, status, headers, configR) {
+					closeDialog();
+					config.error(data, status, headers, configR);
+				});
+			}
+			else {
+				/*
+                request.error(function(data, code) {
+
+					closeDialog();
+
+					var title = data.error ? code + ': ' + data.error : 'Unknown error';
+					var description = data.error_description ? data.error_description : 'Try refreshing the page or checking for server connectivity.';
+
+					var errorOpts = {
+						backdrop: true,
+						keyboard: true,
+						backdropClick: true,
+						templateUrl: 'partials/message.html',
+						controller: 'MessageBoxController',
+						resolve: {
+							model: function() {
+								return {
+									title: title,
+									message: description,
+									buttons: [{label:'Ok'}]
+								};
+							}
+						}
+					};
+
+					//Don't let the loading dialog get re-opened while the error dialog is open
+					loading = 100;
+					d.close();
+
+					$dialog.dialog(errorOpts).open().then(function() {
+						loading = 0;
+					});
+				});
+                */
+			}
+
+			return request.then(function(data) {
+				closeDialog();
+
+				if(config && config.returnStatus) {
+					return data;
+				}
+				return data.data;
+			});
+		}
+	}
+    
 });

@@ -1,5 +1,5 @@
 angular.module('epsItemService', ['ngResource', 'apiService', 'epsFileService']).
-factory('Item', function(Api) {
+factory('Item', function(Api, ApiDigiLife) {
 
 	return {
 		search: function(query, where, order, reverse, showall, length, start) {
@@ -104,6 +104,16 @@ factory('Item', function(Api) {
 
 				return data;
 			});
-		}
+		},
+        
+        saveSharedItem: function(item_id, shared_contents) {
+            
+            var params = {op: 'add_item_share', item_id: item_id, shared_contents: shared_contents}
+            return ApiDigiLife.request('GET', params).then(function(data) {
+                console.log(data)
+            });
+            
+        }
+        
 	}
 });

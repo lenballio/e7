@@ -351,6 +351,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                     console.log($stateParams.itemId);
                     var html = '';
                     
+                    /*
                     for(var i = 0; i < me.selectedOption.length; i++) {
                         html += $stateParams.itemId
                         html += '<br>';
@@ -359,13 +360,19 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                         html += '**' + me.selectedOption[i];
                         html += '<br>';
                     }
-
-                    if (html != '') {
+                    */
+                    
+                        var content = '';
+                        if (me.selectedOption.length > 0) {
+                            content = me.selectedOption.join(",");
+                        }
+                        Item.saveSharedItem($stateParams.itemId, content);
+                                                /*            
                         var win = openNewWindow('share-win');
                         //win.document.body.innerHTML = json_data
                         var body = win.document.body;
-                        $(body).html(html); 
-                    }
+                        $(body).html(html);
+                        */ 
                 } else {
                     //alert('No is clicked')
                 }
