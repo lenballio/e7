@@ -161,7 +161,7 @@ function EPSContributeCtrl($scope, $location, $rootScope, $dialog, Item, Schema,
     
 }
 
-function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $timeout, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection) {
+function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $timeout, Item, Action, Moderate, ModerationStatus, Workflow, File, Link, Collection, Vars) {
     
     $("#item-summary").hide();
     
@@ -349,28 +349,24 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                     //alert('Submit is clicked')
                     var html = '';
                     
-                    /*
-                    for(var i = 0; i < me.selectedOption.length; i++) {
-                        html += $stateParams.itemId
-                        html += '<br>';
-                        html += '&lt;xml&gt;';
-                        html += '<br>';
-                        html += '**' + me.selectedOption[i];
-                        html += '<br>';
-                    }
-                    */
-                    
                         var content = '';
                         if (me.selectedOption.length > 0) {
                             content = me.selectedOption.join(",");
                         }
-                        Item.saveSharedItem($stateParams.itemId, content);
-                                                /*            
-                        var win = openNewWindow('share-win');
-                        //win.document.body.innerHTML = json_data
+
+                        var win = window.open ("", 'share-win',"directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");
+                        win.blur();
                         var body = win.document.body;
-                        $(body).html(html);
-                        */ 
+                        $(body).html("Loading...");
+
+                        Item.saveSharedItem($stateParams.itemId, content).then(function (data) {
+                            console.log('it is saved');
+                            var url = Vars.getDigiLifeURL();
+                            url = url + '?item_id=' + $stateParams.itemId + '&op=get_shared_content';
+                            win.focus();
+                            win.location = url; 
+                        });
+                         
                 } else {
                     //alert('No is clicked')
                 }
@@ -407,10 +403,10 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
 
     /** below funciton will open new window using window.open method **/ 
     
-    function openNewWindow(name) {
+    function openNewWindow(name, url) {
+    
     
         var win = window.open ("", name,"directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=650,height=450");                    
-        
         win.document.doctype ='<!DOCTYPE html>';
         
         var meta = win.document.createElement('meta');
