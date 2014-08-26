@@ -1038,7 +1038,7 @@ Progress Bars
 }
 
 .progress > .progress-bar-success {
-  background-color: #3cc051;
+ /* background-color: #3cc051;*/
 }
 
 .progress > .progress-bar-danger {
