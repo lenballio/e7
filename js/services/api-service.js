@@ -22,7 +22,7 @@ factory('Vars', function() {
 		},
         getDigiLifeURL: function() {
             //return 'http://127.0.0.1:10045/e7-api/api.php';
-            return 'http://www.digi-life.net.au/e7-api/api.php';
+            return 'http://e7.site90.com/e7/app/e7_api/api.php';
         }
 	};
 }).
