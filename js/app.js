@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var eps = angular.module('eps', ['epsItemService', 'epsModerationService', 'epsEntityService', 'epsFileService', 'epsLinkService', 'ui.bootstrap', 'ui.router']).
+var eps = angular.module('eps', ['epsItemService', 'epsModerationService', 'epsEntityService', 'epsFileService', 'epsLinkService', 'ui.bootstrap', 'ui.router', 'epsAttachmentService']).
 //	config(['$routeProvider', function($routeProvider) {
 //	$routeProvider.
 //		when('/search', {templateUrl: 'partials/search-list.html', controller: EPSSearchCtrl}).
