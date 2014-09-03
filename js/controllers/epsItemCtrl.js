@@ -6,7 +6,6 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             $scope.attachments = [];    
         }
         
-        var filter_earth_val = '';
         var filter_media_val = '';
                                
         var tmp_attachments = [];
@@ -14,9 +13,9 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         $scope.myattachments = [];
         
         $scope.filter_attachments = function() {
-            
+        
             //console.log($scope.myattachments);
-            tmp_attachments = Search.attachments($scope.myattachments, filter_earth_val, filter_media_val);
+            tmp_attachments = Search.attachments($scope.myattachments, filter_media_val);
             
                 $scope.new_attachments = tmp_attachments; 
 
@@ -34,87 +33,6 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                                                                         
     }
         
-    
-        $('#filter_earth').editable({
-            prepend: "Earth Type",
-            inputclass: 'form-control',
-            source: [{
-                    value: 'Earth Surface',
-                    text: 'Earth Surface'
-                }, {
-                    value: 'Earth Interior',
-                    text: 'Earth Interior'
-                }
-            ],
-            display: function (value, sourceData) {
-                var colors = {
-                    "": "gray",
-                    "Earth Surface": "#1E8FC6",
-                    "Earth Interior": "#1E8FC6"
-                },
-
-                elem = $.grep(sourceData, function (o) {
-                    return o.value == value;
-                });
-
-                if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
-                } else {
-                    $(this).empty();
-                }
-                
-                filter_earth_val = value 
-                $scope.filter_attachments();
-            }
-        });
-    
-    
-        $('#filter_media').editable({
-            prepend: "Media Type",
-            inputclass: 'form-control',
-            source: [{
-                    value: 'Other',
-                    text: 'Other'
-                }, {
-                    value: 'PDF',
-                    text: 'PDF'
-                }, {
-                    value: 'audio',
-                    text: 'Audio'
-                }, {
-                    value: 'images',
-                    text: 'Images'
-                }, {
-                    value: 'video',
-                    text: 'Video'
-                }, {
-                    value: 'All',
-                    text: 'All'
-                }
-            ],
-            display: function (value, sourceData) {
-                var colors = {
-                    "": "gray",
-                    "Earth Surface": "#1E8FC6",
-                    "Earth Interior": "#1E8FC6"
-                },
-
-                elem = $.grep(sourceData, function (o) {
-                    return o.value == value;
-                });
-
-                if (elem.length) {
-                    $(this).text(elem[0].text).css("color", colors[value]);
-                } else {
-                    $(this).empty();
-                }
-                
-                filter_media_val = value 
-                $scope.filter_attachments();
-            }
-        });
-
-    
     var me = this;
     var metadata = ''; // Task 3
     $scope.loadItem = function () {
@@ -141,6 +59,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             }
 
             loadAttachments();
+            loadEditables();
 
             var modStatus = loadModStatus();
             var workflow = loadWorkflow();
@@ -483,6 +402,58 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             */
         }
     }
+    
+    function loadEditables() {
+        if($scope.item) {
+            var json_data = angular.toJson($scope.item.metadata);
+            json_data = json_data.replace(/(^")/,'', json_data);
+            json_data = json_data.replace(/"$/,'', json_data); 
+                    
+            console.log(json_data);
+            var data = jQuery(json_data);
+            var contentType = data.find('item').find('contentType');
+            
+            var media_filter = [];
+            var item_text = '';
+            
+            media_filter.push({
+                    value: "All",
+                    text: "All" 
+            });
+            
+            $(contentType).each(function(index, item) {
+                item_text = $(item).text();
+                media_filter.push({
+                    value: item_text,
+                    text: item_text 
+                })
+            })
+            
+        }
+        console.log(media_filter);
+    
+
+        $('#filter_media').editable({
+            prepend: "Media Type",
+            inputclass: 'form-control',
+            source: media_filter,
+            display: function (value, sourceData) {
+                elem = $.grep(sourceData, function (o) {
+                    return o.value == value;
+                });
+
+                if (elem.length) {
+                    $(this).text(elem[0].text).css("color", "#1E8FC6");
+                } else {
+                    $(this).empty();
+                }
+                
+                filter_media_val = value 
+                $scope.filter_attachments();
+            }
+        });
+
+    }  // end of loadEditables
     
     $scope.showAllAttachments = function() {
         $scope.attachments = $scope.new_attachments;
