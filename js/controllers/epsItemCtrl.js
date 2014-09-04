@@ -409,7 +409,6 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             json_data = json_data.replace(/(^")/,'', json_data);
             json_data = json_data.replace(/"$/,'', json_data); 
                     
-            console.log(json_data);
             var data = jQuery(json_data);
             var contentType = data.find('item').find('contentType');
             
@@ -421,17 +420,31 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                     text: "All" 
             });
             
+            var is_html = false, is_pdf = false;
             $(contentType).each(function(index, item) {
                 item_text = $(item).text();
+                if (angular.lowercase(item_text) == 'content_manuscript') {
+                    item_text = 'HTML';
+                    is_html = true;
+                } else if (angular.lowercase(item_text) == 'pdf') {
+                    item_text = 'PDF/Docs';
+                    is_pdf = true;    
+                }
                 media_filter.push({
                     value: item_text,
                     text: item_text 
                 })
-            })
+            });
+            
+            if (is_html === true && is_pdf === false) {
+                item_text = 'PDF/Docs';
+                media_filter.push({
+                    value: item_text,
+                    text: item_text 
+                });
+            }
             
         }
-        console.log(media_filter);
-    
 
         $('#filter_media').editable({
             prepend: "Media Type",
