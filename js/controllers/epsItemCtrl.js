@@ -91,6 +91,42 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
     $scope.isAllowed = function (action) {
         return $scope.item && arrayContains($scope.actions[action], $scope.item.status);
     }
+    
+    $scope.openattachment = function(link) {
+        
+        var l = link.replace(/\?(.*)/, '');
+        var l_array = l.split('.');
+        var ext = '';
+
+        if (angular.isDefined(l_array[ l_array.length - 1 ])) {
+            ext = l_array[ l_array.length - 1 ];
+        }
+        ext = angular.lowercase(ext);
+        var opts = {};
+
+        if (ext == 'mp4' || ext == 'xhtml' || ext == 'html' || ext == 'mp3') {
+            $.fancybox({
+                'margin'       :  50,
+                'autoScale'     : true,
+                'transitionIn'  : 'none',
+                'transitionOut' : 'none',
+                'href'          : link,
+                'type'          : 'iframe'
+            });
+        } else if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'png') {
+            $.fancybox({
+                'margin'       :  50,
+                'autoScale'     : true,
+                'transitionIn'  : 'none',
+                'transitionOut' : 'none',
+                'href'          : link
+            });
+        
+        } else {
+            window.open(link, "_blank");
+        }         
+         
+    }
 
     $scope.performAction = function (action) {
 
