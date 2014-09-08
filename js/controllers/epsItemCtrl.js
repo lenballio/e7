@@ -483,7 +483,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         }
 
         $('#filter_media').editable({
-            prepend: "Media Type",
+            //prepend: "Media Type",
             inputclass: 'form-control',
             source: media_filter,
             display: function (value, sourceData) {
