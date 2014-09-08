@@ -33,7 +33,14 @@ factory('Search', function() {
                     //console.log(ext);
                     if (filter_media_val != '') {
                         if (filter_media_val == 'all') {
-                            tmp_attachments.push(myattachments[i]);
+                            if (name_1 == 'html interactivities') {
+                                if (name_array[ name_array.length - 1 ] == 'player.html') {
+                                    tmp_attachments.push(myattachments[i]);
+                                } 
+                            } else {
+                                tmp_attachments.push(myattachments[i]);
+                            }
+                            
                         } else if (filter_media_val == 'html interactivities') {
                             if (angular.isDefined(name_array[ name_array.length - 1 ])) {
                                 if (name_array[ name_array.length - 1 ] == 'player.html') {
