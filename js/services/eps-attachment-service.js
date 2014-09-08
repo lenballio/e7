@@ -10,8 +10,10 @@ factory('Search', function() {
             if (myattachments == undefined) {
                 return;
             }
-            filter_media_val = filter_media_val.toLowerCase(); 
+            filter_media_val = filter_media_val.toLowerCase();
+             
 
+            //console.log('in filter');
             for(var i = 0; i< myattachments.length; i++) {
                 name = myattachments[i].name;
                 name_array = name.split('/');
@@ -32,6 +34,12 @@ factory('Search', function() {
                     if (filter_media_val != '') {
                         if (filter_media_val == 'all') {
                             tmp_attachments.push(myattachments[i]);
+                        } else if (filter_media_val == 'html interactivities') {
+                            if (angular.isDefined(name_array[ name_array.length - 1 ])) {
+                                if (name_array[ name_array.length - 1 ] == 'player.html') {
+                                    tmp_attachments.push(myattachments[i]);
+                                }
+                            }
                         } else if (filter_media_val == 'html') {
                             if (name_1 == "content_manuscript" && ext !== 'doc' && ext !== 'docx' ) {
                                 tmp_attachments.push(myattachments[i]);
