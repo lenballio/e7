@@ -13,7 +13,7 @@ var App = function () {
     var sidebarCollapsedWidth = 35;
 
     var responsiveHandlers = [];
-
+    
     // theme layout color set
     var layoutColorCodes = {
         'blue': '#4b8df8',
@@ -948,7 +948,7 @@ var App = function () {
             handlePopovers(); // handles bootstrap popovers
             handleAccordions(); //handles accordions 
             handleModals(); // handle modals
-            handleFullScreenMode(); // handles full screen
+            handleFullScreenMode(); // handles full screen  
         },
 
         //main function to initiate core javascript after ajax complete

@@ -561,7 +561,7 @@ var Index = function () {
                     $('span', this).text(newValue);
                 });
             });
-               
+            /*   
             $("#sparkline_bar").sparkline([8,9,10,11,10,10,12,10,10,11,9,12,11,10,9,11,13,13,12], {
                 type: 'bar',
                 width: '100',
@@ -586,6 +586,7 @@ var Index = function () {
                 height: '55',
                 lineColor: '#ffb848'
             });
+            */
 
         },
 

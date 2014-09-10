@@ -90,7 +90,8 @@ var eps = angular.module('eps', ['epsItemService', 'epsModerationService', 'epsE
 
           .state("dashboard", {
               url: "/dashboard",
-              templateUrl: 'partials/dashboard.html'
+              templateUrl: 'partials/dashboard.html',
+              controller: EPSDashboard
           })
 
           .state("admin", {
