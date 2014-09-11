@@ -5,7 +5,7 @@ angular.module('eps')
 }]);
 */
 
-function EPSDashboard($scope, $timeout) {
+function EPSDashboard($scope, $timeout, $state) {
     
 
     $('.easy-pie-chart .number.overalleq').easyPieChart({
@@ -172,7 +172,9 @@ function EPSDashboard($scope, $timeout) {
             $("#tooltip").remove();
         });
             
-    
+    $scope.discover = function() {
+        $state.transitionTo('discover.search');     
+    }    
     
 }
 
