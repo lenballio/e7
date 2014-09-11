@@ -291,8 +291,8 @@ padding:0px;
 
 .dashboard .discover {
     background: url('../../images/discover.png') no-repeat;
-    height: 157px;
-    width: 157px;
+    height: 174px;
+    width: 185px;
     margin-left: auto;
     margin-right: auto; 
     cursor: pointer;
@@ -300,38 +300,29 @@ padding:0px;
 }
 
 .dashboard .discover:hover {
-    -moz-box-shadow: 0 0 10px #ccc; 
-    -webkit-box-shadow: 0 0 10px #ccc; 
-    box-shadow: 0 0 10px #ccc;
-    opacity: 0.5;
+    background: url('../../images/discover-hover.png') no-repeat;
 }
 
 .dashboard .create {
     background: url('../../images/create.png') no-repeat;
-    height: 167px;
-    width: 157px;
+    height: 174px;
+    width: 185px;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;    
 }
 .dashboard .create:hover {
-    -moz-box-shadow: 0 0 10px #ccc; 
-    -webkit-box-shadow: 0 0 10px #ccc; 
-    box-shadow: 0 0 10px #ccc;
-    opacity: 0.5;
+    background: url('../../images/create-hover.png') no-repeat;
 }
 
 .dashboard .share {
     background: url('../../images/share.png') no-repeat;
-    height: 167px;
-    width: 157px;
+    height: 174px;
+    width: 185px;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;    
 }
 .dashboard .share:hover {
-    -moz-box-shadow: 0 0 10px #ccc; 
-    -webkit-box-shadow: 0 0 10px #ccc; 
-    box-shadow: 0 0 10px #ccc;
-    opacity: 0.5;
+    background: url('../../images/share-hover.png') no-repeat;
 }
