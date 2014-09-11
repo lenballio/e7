@@ -288,3 +288,50 @@ padding:0px;
 .padding-top5 {
     margin-top: 15px;
 }
+
+.dashboard .discover {
+    background: url('../../images/discover.png') no-repeat;
+    height: 157px;
+    width: 157px;
+    margin-left: auto;
+    margin-right: auto; 
+    cursor: pointer;
+    margin-bottom: 5px;   
+}
+
+.dashboard .discover:hover {
+    -moz-box-shadow: 0 0 10px #ccc; 
+    -webkit-box-shadow: 0 0 10px #ccc; 
+    box-shadow: 0 0 10px #ccc;
+    opacity: 0.5;
+}
+
+.dashboard .create {
+    background: url('../../images/create.png') no-repeat;
+    height: 167px;
+    width: 157px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;    
+}
+.dashboard .create:hover {
+    -moz-box-shadow: 0 0 10px #ccc; 
+    -webkit-box-shadow: 0 0 10px #ccc; 
+    box-shadow: 0 0 10px #ccc;
+    opacity: 0.5;
+}
+
+.dashboard .share {
+    background: url('../../images/share.png') no-repeat;
+    height: 167px;
+    width: 157px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;    
+}
+.dashboard .share:hover {
+    -moz-box-shadow: 0 0 10px #ccc; 
+    -webkit-box-shadow: 0 0 10px #ccc; 
+    box-shadow: 0 0 10px #ccc;
+    opacity: 0.5;
+}
