@@ -30,12 +30,13 @@ function EPSDashboard($scope, $timeout, $state) {
     });
 
     var recent_activities = $('#recent-activities');
-
+    
     $timeout(function() {
+        
         $('.scroller').slimScroll({
-            scrollTo: recent_activities.height()                
+            height: '308px'                
         });    
-
+        
     },200);
 
 
