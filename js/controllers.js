@@ -13,7 +13,7 @@ function EPSSearchCtrl($scope, $rootScope, Item, Collection) {
 
         Item.search($scope.query, $scope.where, $scope.orderProp, $scope.reverse, $scope.showall, perpage, ($scope.currentPage - 1) * perpage).then(function (data) {
 
-            $scope.results = data.results;
+            $scope.results = data.results;   
 
             paging($scope, data, perpage);
         });

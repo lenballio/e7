@@ -326,3 +326,20 @@ padding:0px;
 .dashboard .share:hover {
     background: url('../../images/share-hover.png') no-repeat;
 }
+
+
+
+/*-- Attachment --*/
+.attach-row {
+    margin-top:10px;
+}
+
+.attachment-single {
+    margin-top: 20px;
+    margin-bottom: 10px; 
+    word-break: break-all;
+}
+
+.attach-name {
+    height:30px;
+}

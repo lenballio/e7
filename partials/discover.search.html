@@ -1,10 +1,10 @@
 <div class="col-lg-6">
-    <form ng-submit="search()">
-        <div class="input-icon right searchentry">
+        <form ng-submit="search()">
+            <div class="input-icon right searchentry">
             
-            <input x-webkit-speech ng-model="query" type="text" class="form-control input-lg" name="query" placeholder="enter search..."/>
-            <button class="btn"><i class="fa fa-search"></i></button>
-        </div>
+                <input x-webkit-speech ng-model="query" type="text" class="form-control input-lg" name="query" placeholder="enter search..."/>
+                <button class="btn"><i class="fa fa-search"></i></button>
+            </div>
         </form>
 
         <div class="modifiers col-xs-12">
@@ -40,19 +40,35 @@
                 <!--<a href="#/discover/search/item/{{result.uuid}}/{{result.version}}">-->
                 <a ui-sref=".item({itemId:result.uuid, version:result.version})">
                     <div class="box result">
-                        <h4>{{result.name}}</h4>
-                        <p class="result-desc">{{result.description}}</p>
-                        <p><span class="rating">
-                            3<i class="fa fa-comment"></i>
-                            <i class="fa fa-star grey"></i>
-                            <i class="fa fa-star grey"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            </span>
-                            
-                            <span>VERSION {{result.version}}</span></p>
-                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>{{result.name}}</h4>
+                                    <p class="result-desc">{{result.description}}</p>
+                                    <p><span class="rating">
+                                        3<i class="fa fa-comment"></i>
+                                        <i class="fa fa-star grey"></i>
+                                        <i class="fa fa-star grey"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        </span>
+                                        
+                                        <span>VERSION {{result.version}} </span></p>
+                            </div>
+                            <div class="col-md-4" style="margin-top:10px;">
+                                <div ng-if="results.indexOf(result) % 3 == 0"> 
+                                    <img src="images/img1.png" />
+                                </div>
+                                
+                                <div ng-if="results.indexOf(result) % 3 == 1"> 
+                                    <img src="images/img2.png" />
+                                </div>
+                                
+                                <div ng-if="results.indexOf(result) % 3 == 2"> 
+                                    <img src="images/img3.png" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </a>
             </li>

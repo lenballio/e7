@@ -505,7 +505,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
     }  // end of loadEditables
     
     $scope.showAllAttachments = function() {
-        $scope.attachments = $scope.new_attachments;
+        $scope.attachments = $scope.new_attachments;  
         $scope.viewAll = false;    
     }
 
@@ -554,4 +554,46 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             $scope.history = data;
         });
     }
+    
+    $scope.getExtension = function(link) {
+        var l = link.replace(/\?(.*)/, '');
+        var l_array = l.split('.');
+        var ext = '';
+
+        if (angular.isDefined(l_array[ l_array.length - 1 ])) {
+            ext = l_array[ l_array.length - 1 ];
+        }
+        ext = angular.lowercase(ext); 
+        return ext;
+    }
+    
+    $scope.getName = function(name) {
+        var name = name.replace(/\?(.*)/, '');
+        var l_array = name.split('/');
+       
+        var name = '';
+        if (angular.isDefined(l_array[ l_array.length - 1 ])) {
+            name = l_array[ l_array.length - 1 ];
+        }
+        return name;
+    }
+    
+    $scope.getImagepath = function(link) {
+        var l = link.replace(/\?(.*)/, '');
+        var l_array = l.split('.');
+        var ext = '';
+
+        if (angular.isDefined(l_array[ l_array.length - 1 ])) {
+            ext = l_array[ l_array.length - 1 ];
+        }
+        ext = angular.lowercase(ext); 
+        
+        if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
+            return link; 
+        } else {
+            return 'images/imgThumb.png';
+        }
+    }
+    
+    
 }

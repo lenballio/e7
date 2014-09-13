@@ -24,10 +24,16 @@
                 &nbsp;
                 <a href="#" id="filter_media" data-type="select" data-pk="1" data-value="All" data-original-title="Media Type Filter"></a>
         </dd>
-        <dd>
-            <ul>
-                <li ng-repeat="attachment in attachments"><a  href="" target="_blank" ng-click="openattachment(attachment.link)" >{{attachment.name}}</a></li>
-            </ul>
+        <dd> 
+            <!-- Attachment -->
+            <div class="row attach-row">
+                <div class="col-md-12">
+                    <div class="col-md-3 attachment-single" ng-repeat="attachment in attachments">
+                        <a href="" target="_blank" ng-click="openattachment(attachment.link)"><img src="{{getImagepath(attachment.link)}}" title="{{getName(attachment.name)}}" width="100" height="100"> <div class="attach-name"> {{getName(attachment.name)}} </div> </a>
+                    </div>
+                </div>
+            </div>   
+            <!--/Attachment -->
         </dd>
         
         <br />
@@ -35,7 +41,6 @@
     </p>
     
     <br />
-
 
 	<div class="spontent">
 		<div class="btn-group">
