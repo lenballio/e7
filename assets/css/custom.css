@@ -350,3 +350,10 @@ padding:0px;
     margin-top: 30px;
     margin-bottom: 40px;
 }
+
+.fa-6 {
+    font-size: 13em;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    cursor: pointer;
+}

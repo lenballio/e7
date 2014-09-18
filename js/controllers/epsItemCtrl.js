@@ -430,6 +430,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                 url = $scope.getFileURL(link);
                 fileName = $scope.getFileName(name);
                 ext = $scope.getExtension(link);
+                console.log(ext);
 
                 fa_icon = '';
                 thumb = '';
@@ -437,12 +438,14 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                 if (ext == 'mp3' || ext == 'wav') {
                     fa_icon = 'fa-volume-up';
                 } else if (ext == 'mp4' || ext == 'avi' || ext == 'flv' || ext == 'mov' || ext == 'm4v') {
-                    fa_icon = 'fa-bolt';
+                    fa_icon = 'fa-video-camera';
                 } else if (ext == 'pdf' || ext == 'doc' || ext == 'docx') {
                     fa_icon = 'fa-book';
                 } else if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
                     fa_icon = ''; 
                     thumb = '111';
+                } else if (ext == 'html' || ext == 'xhtml' || ext == 'xsd') {
+                    fa_icon = 'fa-rocket';
                 } else {
                     fa_icon = 'fa-globe';
                 }

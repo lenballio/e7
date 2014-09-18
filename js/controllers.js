@@ -25,9 +25,8 @@ function EPSSearchCtrl($scope, $rootScope, Item, Collection) {
         var img = 'images/discover/img2.png';
         name = angular.lowercase(name);
         
-        
-        console.log('image name = ');
-        console.log(name);
+        //console.log('image name = ');
+        //console.log(name);
         
         switch (name) {
             case 'welcome to pearson':
