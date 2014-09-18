@@ -29,7 +29,20 @@
             <div class="row attach-row">
                 <div class="col-md-12">
                     <div class="col-md-3 attachment-single" ng-repeat="attachment in attachments">
-                        <a href="" target="_blank" ng-click="openattachment(attachment.link)"><img src="{{getImagepath(attachment.link)}}" title="{{getName(attachment.name)}}" width="100" height="100"> <div class="attach-name"> {{getName(attachment.name)}} </div> </a>
+                        <a href="" target="_blank" ng-click="openattachment(attachment.link)">
+                            <div ng-if="attachment.thumb == ''" >
+                                <i  title="{{attachment.fileName}}" class="fa {{attachment.fa_icon}} fa-4"></i>
+                            </div>
+                            
+                            <div ng-if="attachment.thumb != ''" >
+                                <img src="{{attachment.thumb_url}}" title="{{attachment.fileName}}" width="80" height="80">
+                            </div>
+                            <!--
+                            <img ng-hide="attachment.fa_icon" src="{{attachment.url}}" title="{{attachment.fileName}}" width="80" height="80"> 
+                            <i ng-hide="attachment.thumb" class="fa {{attachment.fa_icon}} fa-lg"></i>
+                             -->
+                            <div class="attach-name" > {{attachment.fileName}} </div> 
+                        </a>
                     </div>
                 </div>
             </div>   

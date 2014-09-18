@@ -382,7 +382,8 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
     }
 
     function loadAttachments() {
-
+        var url = fileName = fa_icon = thumb = ext = '';
+        
         if ($scope.item.attachments) {
 
             $scope.attachments = [];
@@ -393,15 +394,17 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
 
             for (var i in $scope.item.attachments) {
                 var attachment = $scope.item.attachments[i];
-
-                var name = attachment.filename;
+                
+                var name = attachment.filename;             
+                var thumb_url = '';
                 var link = '';
-
+                var thumb_url = '';
                 switch (attachment.type) {
                     case 'file':
                     case 'htmlpage':
                     case 'package-res':
                         link = Link.file(attachment.filename, $scope.item.uuid, $scope.item.version);
+                        thumb_url = Link.file(attachment.thumbFilename, $scope.item.uuid, $scope.item.version);
                         break;
                     case 'zip':
                         link = Link.file(attachment.folder, $scope.item.uuid, $scope.item.version);
@@ -422,10 +425,33 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                         break;
 
                 }
-
+                //attachment.links.thumbnail 
                 //$scope.attachments.push({ name: name, link: link });
-                $scope.myattachments.push({ name: name, link: link });
+                url = $scope.getFileURL(link);
+                fileName = $scope.getFileName(name);
+                ext = $scope.getExtension(link);
+
+                fa_icon = '';
+                thumb = '';
+
+                if (ext == 'mp3' || ext == 'wav') {
+                    fa_icon = 'fa-volume-up';
+                } else if (ext == 'mp4' || ext == 'avi' || ext == 'flv' || ext == 'mov' || ext == 'm4v') {
+                    fa_icon = 'fa-bolt';
+                } else if (ext == 'pdf' || ext == 'doc' || ext == 'docx') {
+                    fa_icon = 'fa-book';
+                } else if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
+                    fa_icon = ''; 
+                    thumb = '111';
+                } else {
+                    fa_icon = 'fa-globe';
+                }
+                     
+                $scope.myattachments.push({ name: name, link: link, url: url, fileName: fileName, fa_icon: fa_icon, thumb: thumb, thumb_url: thumb_url});
             }
+            
+            //console.log('scope.myattachments=');
+            //console.log($scope.myattachments);
             
             $scope.filter_attachments();
             /*
@@ -567,7 +593,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         return ext;
     }
     
-    $scope.getName = function(name) {
+    $scope.getFileName = function(name) {
         var name = name.replace(/\?(.*)/, '');
         var l_array = name.split('/');
        
@@ -578,7 +604,7 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
         return name;
     }
     
-    $scope.getImagepath = function(link) {
+    $scope.getFileURL = function(link) {
         var l = link.replace(/\?(.*)/, '');
         var l_array = l.split('.');
         var ext = '';
