@@ -19,11 +19,11 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             
                 $scope.new_attachments = tmp_attachments; 
 
-                if ($scope.new_attachments.length <= 10) {
+                if ($scope.new_attachments.length <= 12) {
                     $scope.attachments = $scope.new_attachments;
                     $scope.viewAll = false; 
                 } else {
-                    $scope.attachments = $scope.new_attachments.slice(0, 10); 
+                    $scope.attachments = $scope.new_attachments.slice(0, 12); 
                     $scope.viewAll = true;
                 }
                 
@@ -473,6 +473,8 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                     
             var data = jQuery(json_data);
             var contentType = data.find('item').find('contentType');
+            
+            //console.log('contentType=');            console.log(contentType);
             
             var media_filter = [];
             var item_text = '';

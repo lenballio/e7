@@ -5,7 +5,7 @@
 function EPSSearchCtrl($scope, $rootScope, Item, Collection) {
 
     $scope.search = function (page) {
-
+        
         var perpage = 10;
         $scope.results = undefined;
         $scope.noResults = false;
@@ -17,7 +17,36 @@ function EPSSearchCtrl($scope, $rootScope, Item, Collection) {
 
             paging($scope, data, perpage);
         });
+        
+        
     };
+    
+    $scope.getDiscoverImageName = function(name) {
+        var img = 'images/discover/img2.png';
+        name = angular.lowercase(name);
+        
+        
+        console.log('image name = ');
+        console.log(name);
+        
+        switch (name) {
+            case 'welcome to pearson':
+                img = 'images/discover/img1.png';
+            break;
+            case 'earth\'s surface_lv1':
+            case 'earth\'s surface':
+                img = 'images/discover/earth-surface.jpg';
+            break;
+            case 'earth\'s interior_lv1':
+            case 'earth\'s interior':
+                img = 'images/discover/earch-interior.jpg';
+            break;
+            case 'hello world':
+                img = 'images/discover/helloworld.jpg';
+            break;
+        }
+        return img;
+    }
 
     $scope.search();
 

@@ -56,17 +56,10 @@
                                         <span>VERSION {{result.version}} </span></p>
                             </div>
                             <div class="col-md-4" style="margin-top:10px;">
-                                <div ng-if="results.indexOf(result) % 3 == 0"> 
-                                    <img src="images/img1.png" />
+                                <div > 
+                                    <img src="{{getDiscoverImageName(result.name)}}" />
                                 </div>
                                 
-                                <div ng-if="results.indexOf(result) % 3 == 1"> 
-                                    <img src="images/img2.png" />
-                                </div>
-                                
-                                <div ng-if="results.indexOf(result) % 3 == 2"> 
-                                    <img src="images/img3.png" />
-                                </div>
                             </div>
                         </div>
                     </div>
