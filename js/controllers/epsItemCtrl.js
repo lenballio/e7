@@ -453,8 +453,10 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                 $scope.myattachments.push({ name: name, link: link, url: url, fileName: fileName, fa_icon: fa_icon, thumb: thumb, thumb_url: thumb_url});
             }
             
-            //console.log('scope.myattachments=');
-            //console.log($scope.myattachments);
+            /***
+            console.log('scope.myattachments=');
+            console.log($scope.myattachments);
+            ***/
             
             $scope.filter_attachments();
             /*
@@ -470,11 +472,16 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
     
     function loadEditables() {
         if($scope.item) {
+        
             var json_data = angular.toJson($scope.item.metadata);
             json_data = json_data.replace(/(^")/,'', json_data);
             json_data = json_data.replace(/"$/,'', json_data); 
                     
             var data = jQuery(json_data);
+            
+            //console.log('data');
+            //console.log(data);
+            
             var contentType = data.find('item').find('contentType');
             
             //console.log('contentType=');            console.log(contentType);
@@ -488,19 +495,30 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
             });
             
             var is_html = false, is_pdf = false;
-            $(contentType).each(function(index, item) {
-                item_text = $(item).text();
-                if (angular.lowercase(item_text) == 'content_manuscript') {
-                    item_text = 'HTML';
-                    is_html = true;
-                } else if (angular.lowercase(item_text) == 'pdf') {
-                    item_text = 'PDF/Docs';
-                    is_pdf = true;    
-                }
-                media_filter.push({
-                    value: item_text,
-                    text: item_text 
-                })
+            
+            //var attachments_array = [];
+            //$scope.myattachments
+            
+            var el_array, item_name;
+            $($scope.myattachments).each(function(index, item) {
+                item_name = item.name;
+                el_array = item_name.split('/');
+
+                if(el_array.length > 1) {
+                    item_text = el_array[0];
+                    if (angular.lowercase(item_text) == 'content_manuscript') {
+                        item_text = 'HTML';
+                        is_html = true;
+                    } else if (angular.lowercase(item_text) == 'pdf') {
+                        item_text = 'PDF/Docs';
+                        is_pdf = true;    
+                    }
+                    media_filter.push({
+                        value: item_text,
+                        text: item_text 
+                    });
+                }; 
+            
             });
             
             if (is_html === true && is_pdf === false) {
@@ -510,9 +528,22 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                     text: item_text 
                 });
             }
-            
         }
+        
+        //create unique array
+        var unique_array = [], unique_key = [];
+        for (var i = 0; i < media_filter.length; i++) {
+            if (unique_key.indexOf(media_filter[i].value) == -1) {
+                unique_key.push(media_filter[i].value);
+                unique_array.push(media_filter[i]);
+            }
+        }
+        
+        media_filter = unique_array;
 
+        delete unique_array;
+        delete unique_key;         
+        
         $('#filter_media').editable({
             //prepend: "Media Type",
             inputclass: 'form-control',
