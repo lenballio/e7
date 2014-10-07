@@ -436,16 +436,25 @@ function EPSItemCtrl($scope, $stateParams, $location, $rootScope, $dialog, $q, $
                 thumb = '';
 
                 if (ext == 'mp3' || ext == 'wav') {
-                    fa_icon = 'fa-volume-up';
+                    fa_icon = 'fa-headphones';
                 } else if (ext == 'mp4' || ext == 'avi' || ext == 'flv' || ext == 'mov' || ext == 'm4v') {
-                    fa_icon = 'fa-video-camera';
-                } else if (ext == 'pdf' || ext == 'doc' || ext == 'docx') {
-                    fa_icon = 'fa-book';
+                    fa_icon = 'fa-camera-retro';
+                } else if (ext == 'pdf') {
+                    fa_icon = 'fa-file-pdf-o';
+                } else if (ext == 'doc' || ext == 'docx') {
+                    fa_icon = 'fa-file-word-o';
                 } else if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
                     fa_icon = ''; 
                     thumb = '111';
                 } else if (ext == 'html' || ext == 'xhtml' || ext == 'xsd') {
                     fa_icon = 'fa-rocket';
+                    //fa_icon = 'fa-html5';
+                } else if (ext == 'css') {
+                    fa_icon = 'fa-css3';
+                } else if(ext == 'ttf' || ext == 'woff') {
+                    fa_icon = 'fa-font';
+                } else if(ext == 'svg') {
+                    fa_icon = 'fa-file-image-o';
                 } else {
                     fa_icon = 'fa-globe';
                 }
